@@ -5,21 +5,21 @@ import com.simphony_test.app.PageObjects.careers.CurrentOpeningsPage;
 import com.simphony_test.app.TestData.Data;
 import org.openqa.selenium.WebDriver;
 
-public class DashBoardPage extends Utilize {
+public class DashBoardPage extends Utilize{
 
 
-    public DashBoardPage(WebDriver driver) {
+    public DashBoardPage(WebDriver driver){
         super(driver);
     }
 
-    public AboutUsPage aboutUs() {
+    public AboutUsPage aboutUs(){
         MenuSideBar menuSideBar = new MenuSideBar(driver);
         menuSideBar.navigateToAboutUs();
         new Helper().validateResponse(driver.getCurrentUrl());
         return new AboutUsPage(driver);
     }
 
-    public CurrentOpeningsPage careers() {
+    public CurrentOpeningsPage careers(){
         MenuSideBar menuSideBar = new MenuSideBar(driver);
         menuSideBar.navigateToCareers(Data.curremtOpenings);
         return new CurrentOpeningsPage(driver);

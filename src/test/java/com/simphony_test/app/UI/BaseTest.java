@@ -13,30 +13,31 @@ public class BaseTest {
     protected WebDriver driver;
 
     @BeforeClass
-    public void baseMethod() {
-        switch (System.getProperty("browser")) {
-            case "chrome":
-                driver = WebDriverManager.chromedriver().create();
-                break;
+    public void baseMethod(){
+        switch (System.getProperty("browser"))
+            {
+                case "chrome":
+                    driver = WebDriverManager.chromedriver().create();
+                    break;
 
-            case "firefox":
-                driver = WebDriverManager.firefoxdriver().create();
-                break;
+                case "firefox":
+                    driver = WebDriverManager.firefoxdriver().create();
+                    break;
 
-            case "edge":
-                driver = WebDriverManager.edgedriver().create();
-                break;
-            default:
-                driver = WebDriverManager.chromedriver().create();
-                break;
-        }
+                case "edge":
+                    driver = WebDriverManager.edgedriver().create();
+                    break;
+                default:
+                    driver = WebDriverManager.chromedriver().create();
+                    break;
+            }
         driver.manage().window().maximize();
         new Helper().validateResponse(Data.baseURL);
         driver.get(Data.baseURL);
     }
 
     @AfterClass
-    public void quitDriver() {
+    public void quitDriver(){
         driver.quit();
     }
 }

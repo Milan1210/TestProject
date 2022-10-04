@@ -25,25 +25,25 @@ public class Utilize extends Data {
     protected WebDriverWait wait;
     protected Actions actions;
 
-    public Utilize(WebDriver driver) {
+    public Utilize(WebDriver driver){
         this.driver = driver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         actions = new Actions(driver);
-        PageFactory.initElements(driver, this);
+        PageFactory.initElements(driver,this);
     }
 
-    public void click(WebElement element) {
+    public void click(WebElement element){
         wait.until(ExpectedConditions.elementToBeClickable(element));
         element.click();
     }
 
-    public void waitForVisible(WebElement element) {
+    public void waitForVisible(WebElement element){
         wait.until(ExpectedConditions.visibilityOf(element));
         element.click();
     }
 
-    public void superClick(WebElement element, int sec) {
-        for (int i = 0; i < sec; i++) {
+    public void superClick(WebElement element, int sec){
+        for (int i = 0; i<sec ; i ++){
             try {
                 element.click();
                 break;
@@ -54,11 +54,11 @@ public class Utilize extends Data {
         }
     }
 
-    public void superWait(WebElement element, int sec) {
-        for (int i = 0; i < sec; i++) {
+    public void superWait(WebElement element, int sec){
+        for (int i = 0; i<sec ; i ++){
             try {
                 if (element.isDisplayed())
-                    break;
+                break;
             } catch (NoSuchElementException e) {
                 sleep(1000);
                 e.getMessage();
@@ -66,21 +66,21 @@ public class Utilize extends Data {
         }
     }
 
-    public void scrollIntoView(WebElement element) {
+    public void scrollIntoView(WebElement element){
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
-    public void mouseHover(WebElement element) {
+    public void mouseHover(WebElement element){
         waitForVisible(element);
         actions.moveToElement(element).perform();
     }
 
-    public void assertString(String actual, String expected) {
-        Assert.assertEquals(actual, expected, "String is not matches");
+    public void assertString(String actual, String expected){
+        Assert.assertEquals(actual,expected,"String is not matches");
     }
 
-    public void sleep(int time) {
+    public void sleep(int time){
         try {
             Thread.sleep(time);
         } catch (InterruptedException e) {
@@ -88,33 +88,33 @@ public class Utilize extends Data {
         }
     }
 
-    public void readFromXmlFile(String section, String element) {
+    public void readFromXmlFile(String section, String element){
         String basePath = System.getProperty("user.dir");
-        System.out.println("aaa " + basePath);
-        File file = new File(basePath + "\\resources\\files\\data.xml");
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        System.out.println("aaa "+basePath);
+        File file = new File(basePath+"\\resources\\files\\data.xml");
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         try {
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document doc = db.parse(file);
             NodeList nodeList = doc.getElementsByTagName(section);
             Node node = nodeList.item(0);
             Element eElement = (Element) node;
-            System.out.println("hq is " + eElement.getElementsByTagName(element).item(0).getTextContent());
+            System.out.println("hq is "+eElement.getElementsByTagName(element).item(0).getTextContent());
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void readFromXmlFile1(String section, String element) {
+    public void readFromXmlFile1(String section, String element){
         String basePath = System.getProperty("user.dir");
-        System.out.println("aaa " + basePath);
-        File file = new File(basePath + "\\resources\\files\\data.xml");
+        System.out.println("aaa "+basePath);
+        File file = new File(basePath+"\\resources\\files\\data.xml");
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         try {
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document doc = db.parse(file);
             Element element1 = doc.getDocumentElement();
-            System.out.println("Element of QA is " + element1.getElementsByTagName("hq").item(1).getTextContent());
+            System.out.println("Element of QA is "+element1.getElementsByTagName("hq").item(1).getTextContent());
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
@@ -122,10 +122,10 @@ public class Utilize extends Data {
 
     public PrintWriter writeToFile(String s1, String s2) throws FileNotFoundException {
         String basePath = System.getProperty("user.dir");
-        File file = new File(basePath + "\\resources\\files\\all_positions.txt");
+        File file = new File(basePath+"\\resources\\files\\all_positions.txt");
         try {
-            PrintWriter writer = new PrintWriter(file, "UTF-8");
-            writer.println("S1 " + s1 + " String s2 " + s2);
+            PrintWriter writer = new PrintWriter(file,"UTF-8");
+            writer.println("S1 "+s1+" String s2 "+s2);
 //            writer.close();
         } catch (FileNotFoundException | UnsupportedEncodingException e) {
             e.printStackTrace();

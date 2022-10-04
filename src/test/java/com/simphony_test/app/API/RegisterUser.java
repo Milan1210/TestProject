@@ -1,40 +1,37 @@
 package com.simphony_test.app.API;
 
+import com.simphony_test.app.API.data.DataGenerator;
+import com.simphony_test.app.API.data.DataProviderTst;
 import com.simphony_test.app.API.data.TestData;
-import com.simphony_test.app.API.obj.RegUserRes;
 import com.simphony_test.app.Helper;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import io.restassured.mapper.ObjectMapperType;
 import io.restassured.response.Response;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class RegisterUser extends TestData {
-    @Test(priority = 0)
-    public void generateToken() {
+    @Test(priority = 0,dataProvider = "RegisterUser",dataProviderClass = DataProviderTst.class)
+    public void generateToken(String email, String password, String first_name, String last_name,String username, String dateOfBirth){
         Helper helper = new Helper();
 
-        RestAssured.baseURI = BASE_URL;
-        RestAssured.basePath = BASE_PATH;
+        RestAssured.baseURI=BASE_URL;
+        RestAssured.basePath=BASE_PATH;
 
-        String email = EMAIL;
-        String password = SET_PASSWORD;
+        Map<String,String> body = new HashMap<>();
 
-        Map<String, String> body = new HashMap<>();
-        body.put("email", email);
-        body.put("password", password);
-        body.put("firstName", FIRST_NAME);
-        body.put("lastName", LAST_NAME);
-        body.put("username", SET_USERNAME);
-        body.put("dateOfBirth", DATE_OF_BIRTH);
+        body.put("email",email);
+        body.put("password",password);
+        body.put("firstName",first_name);
+        body.put("lastName",last_name);
+        body.put("username",username);
+        body.put("dateOfBirth",dateOfBirth);
 
         System.out.println(body);
         Response response = RestAssured
-            .given()
+                .given()
                     .contentType(ContentType.JSON)
                     .body(body)
                 .when()
@@ -45,9 +42,18 @@ public class RegisterUser extends TestData {
                     .response();
 
         response.prettyPrint();
-        RegUserRes regUserRes = response.getBody().as(RegUserRes.class, ObjectMapperType.GSON);
-        Assert.assertTrue(regUserRes.getSuccess().equals("Thanks for signing up."));
-        helper.setPropery("USERNAME", email);
-        helper.setPropery("PASSWORD", password);
+
+        helper.setPropery("EMAIL",email);
+        helper.setPropery("PASSWORD",password);
+        helper.setPropery("USERNAME",username);
+    }
+
+    @Test
+    public void test(){
+        System.out.println(new DataGenerator().generateRandomString(5));
+        System.out.println(new DataGenerator().generateRandomString(5));
+        System.out.println(new DataGenerator().generateRandomString(5));
+        System.out.println(new DataGenerator().generateRandomString(5));
+        System.out.println(new DataGenerator().generateRandomString(5));
     }
 }

@@ -11,27 +11,29 @@ import static io.restassured.RestAssured.*;
 public class AddPosts extends GenerateToken {
 
     @Test(priority = 1)
-    public void addPost() {
+    public void addPost(){
         Helper helper = new Helper();
 
         JSONObject body = new JSONObject();
-        body.put("text", "Test post " + generateRandomString(55));
+        body.put("text","Test post "+generateRandomString(55));
 
         Response response =
                 given()
-                        .contentType(ContentType.JSON)
-                        .header("Authorization", token)
-                        .body(body)
-                    .when()
-                        .log()
-                        .all()
-                        .post("/posts/")
-                    .then()
-                        .extract()
-                        .response();
+                    .contentType(ContentType.JSON)
+                    .header("Authorization",token)
+                    .body(body)
+                .when()
+                    .post("/posts/")
+                .then()
+                    .extract()
+                    .response();
 
         response.prettyPrint();
         int id = response.path("id");
-        helper.setPropery("POST_ID", String.valueOf(id));
+        helper.setPropery("POST_ID",String.valueOf(id));
     }
 }
+//https://randomlyapi.symphony.is/api/posts
+
+// post id 338
+// comment id 131

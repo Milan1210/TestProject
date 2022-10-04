@@ -17,12 +17,12 @@ public class MenuSideBar extends Utilize {
         super(driver);
     }
 
-    public void navigateToAboutUs() {
+    public void navigateToAboutUs(){
         click(aboutUs);
     }
 
-    public void navigateToCareers(String option) {
+    public void navigateToCareers(String option){
         mouseHover(careers);
-        superClick(driver.findElement(By.xpath("//a[text()='" + option + "']")), 10);
+        superClick(driver.findElement(By.xpath("//a[text()='"+option+"']")),10);
     }
 }
