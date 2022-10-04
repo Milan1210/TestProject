@@ -59,4 +59,4 @@ mvn clean verify -DsuiteXmlFiles=suits/BE_tests.xml
 ```
 
 ### Note
-There are two branches where tests can be executed on the master branch you can run regular tests with signal data while the data_generator branch is quite similar only more related to API tests and on this branch there is a data provider that contains different data and the single test will be executed multiple times with different input data.
+There are two branches where tests can be executed on the main branch you can run regular tests with signal data while the data_generator branch is quite similar only more related to API tests and on this branch there is a data provider that contains different data and the single test will be executed multiple times with different input data.
